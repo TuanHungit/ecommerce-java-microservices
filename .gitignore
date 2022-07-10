@@ -1,12 +1,12 @@
 HELP.md
 */target/
 /target/
-!.mvn/wrapper/maven-wrapper.jar
+*/!.mvn/wrapper/maven-wrapper.jar
 
-/.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
+*/.gradle
+*/build/
+*/gradle/wrapper/gradle-wrapper.jar
+*/!**/src/main/**/build/
 !**/src/test/**/build/
 */logs/
 logs/
