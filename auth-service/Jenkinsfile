@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+
+        stage('Pre config') {
+            steps {
+                sh 'cd auth-service'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'mvn -DskipTests=true clean package'
