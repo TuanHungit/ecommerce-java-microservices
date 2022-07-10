@@ -10,16 +10,18 @@ pipeline {
     }
     stages {
         stage('Build') {
-            steps {
-                sh 'cd auth-service'
-                sh 'mvn -DskipTests=true clean package'
+            dir('auth-service') {
+                steps {
+                    sh 'mvn -DskipTests=true clean package'
+                }
             }
         }
 
         stage('Build docker image') {
-            steps {
-                sh 'cd auth-service'
-                sh 'docker build -t tuanhung/auth-service:1.0.0 .'
+            dir('auth-service') {
+                steps {
+                    sh 'docker build -t tuanhung/auth-service:1.0.0 .'
+                }
             }
         }
 
@@ -27,11 +29,11 @@ pipeline {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
-
-            steps {
-                sh 'cd auth-service'
-                sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-                sh 'docker image push tuanhung/auth-service:1.0.0'
+            dir('auth-service') {
+               steps {
+                   sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+                   sh 'docker image push tuanhung/auth-service:1.0.0'
+               }
             }
         }
     }
