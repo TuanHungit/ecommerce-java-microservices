@@ -5,10 +5,17 @@ pipeline {
         pollSCM '* * * * *'
     }
 
+    tools {
+        maven "MAVEN"
+        jdk "JDK"
+    }
+
     stages {
 
         stage('Pre config') {
             steps {
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
                 sh 'cd auth-service'
             }
         }
