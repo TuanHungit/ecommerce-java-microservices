@@ -4,11 +4,6 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
-
-    tools {
-        maven "MAVEN"
-    }
-
     stages {
 
         stage('Pre config') {
