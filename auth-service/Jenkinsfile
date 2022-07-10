@@ -9,21 +9,16 @@ pipeline {
         maven 'M3'
     }
     stages {
-
-        stage('Pre config') {
-            steps {
-                sh 'cd auth-service'
-            }
-        }
-
         stage('Build') {
             steps {
+                sh 'cd auth-service'
                 sh 'mvn -DskipTests=true clean package'
             }
         }
 
         stage('Build docker image') {
             steps {
+                sh 'cd auth-service'
                 sh 'docker build -t tuanhung/auth-service:1.0.0 .'
             }
         }
@@ -34,6 +29,7 @@ pipeline {
             }
 
             steps {
+                sh 'cd auth-service'
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
                 sh 'docker image push tuanhung/auth-service:1.0.0'
             }
