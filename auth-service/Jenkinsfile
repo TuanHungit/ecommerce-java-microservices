@@ -37,5 +37,15 @@ pipeline {
 
             }
         }
+
+        stage('Deploying App to Kubernetes') {
+          steps {
+            dir('auth-service') {
+                script {
+                  kubernetesDeploy(configs: "auth-service.yml", kubeconfigId: "kubernetes")
+                }
+            }
+          }
+        }
     }
 }
