@@ -40,4 +40,4 @@ metadata:
 rules:
   - apiGroups: ["", "extensions", "apps"]
     resources: ["deployments", "replicasets", "pods"]
-    verbs: ["get", "list", "watch", "create", "
+    verbs: ["get", "list", "watch", "create"]
