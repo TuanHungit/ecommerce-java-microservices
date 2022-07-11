@@ -8,6 +8,6 @@ public class AuthController {
 
     @GetMapping
     public String status() {
-        return "Hi, this is Auth Service!";
+        return "Hello, this is Auth Service!";
     }
 }
