@@ -42,7 +42,7 @@ pipeline {
           steps {
             dir('auth-service') {
                 script {
-                  kubernetesDeploy(configs: "auth-service.yml", kubeconfigId: "kubernetes")
+                  kubernetesDeploy(configs: "/kube/auth-service.yml", kubeconfigId: "kubernetes")
                 }
             }
           }
