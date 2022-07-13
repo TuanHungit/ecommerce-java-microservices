@@ -41,9 +41,7 @@ pipeline {
         stage('Deploying App to Kubernetes') {
           steps {
             dir('kube') {
-                steps {
-                    sh 'kubectl apply -f auth-service.yaml'
-                }
+                sh 'kubectl apply -f auth-service.yaml'
             }
           }
         }
