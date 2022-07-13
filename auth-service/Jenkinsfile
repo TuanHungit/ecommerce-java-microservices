@@ -41,8 +41,8 @@ pipeline {
         stage('Deploying App to Kubernetes') {
           steps {
             dir('kube') {
-                script {
-                  kubernetesDeploy(configs: "auth-service.yaml", kubeconfigId: "kubernetes")
+                steps {
+                    sh 'kubectl apply -f auth-service.yaml'
                 }
             }
           }

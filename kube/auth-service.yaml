@@ -30,14 +30,3 @@ spec:
     - port: 81
       targetPort: 8081
   type: LoadBalancer
-
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  namespace: apps
-  name: auth-service
-rules:
-  - apiGroups: ["", "extensions", "apps"]
-    resources: ["deployments", "replicasets", "pods"]
-    verbs: ["get", "list", "watch", "create"]
