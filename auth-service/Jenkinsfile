@@ -42,11 +42,9 @@ pipeline {
         stage('Deploying App to Kubernetes') {
           steps {
             dir('kube') {
-                steps {
-                  withKubeConfig([credentialsId: 'kubernetes']) {
+              withKubeConfig([credentialsId: 'kubernetes']) {
                   sh 'kubectl apply -f auth-service.yaml'
                   sh 'kubectl patch deployment auth-service -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"$CI_COMMIT_SHORT_SHA\"}}}}}}"'
-                }
               }  
             }
           }
