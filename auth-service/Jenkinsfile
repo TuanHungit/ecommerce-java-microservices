@@ -38,16 +38,17 @@ pipeline {
 
             }
         }
-
-        stage('Deploying App to Kubernetes') {
-          steps {
-            dir('kube') {
-              withKubeConfig([credentialsId: 'file-aws-config']) {
-                  sh 'kubectl apply -f auth-service.yaml'
-                  sh 'kubectl patch deployment auth-service -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"$CI_COMMIT_SHORT_SHA\"}}}}}}"'
-              }  
+        node {
+            stage('Deploying App to Kubernetes') {
+              steps {
+                dir('kube') {
+                  withKubeConfig([credentialsId: 'file-aws-config']) {
+                      sh 'kubectl apply -f auth-service.yaml'
+                      sh 'kubectl patch deployment auth-service -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"$CI_COMMIT_SHORT_SHA\"}}}}}}"'
+                  }  
+                }
+              }
             }
-          }
         }
     }
 }
