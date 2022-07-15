@@ -8,6 +8,6 @@ public class AuthController {
 
     @GetMapping
     public String status() {
-        return "Hello, this is Auth Service which is already CICD, test image prune!";
+        return "Hello, this is Auth Service which is already CICD!";
     }
 }
