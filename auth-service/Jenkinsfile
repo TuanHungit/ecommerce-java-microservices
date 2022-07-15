@@ -21,7 +21,7 @@ pipeline {
             steps {
                 dir('auth-service') {
                     sh 'docker build -t tuanhung/auth-service:1.0.0 .'
-                    sh 'docker image prune'
+                    sh 'docker image prune -f'
                 }
             }
         }
