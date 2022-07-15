@@ -1,14 +1,5 @@
-pipeline {
-    agent any
 
-    triggers {
-        pollSCM '* * * * *'
-    }
-
-    tools {
-        maven 'M3'
-    }
-    node {
+node {
         stage('Build') {
             steps {
                 dir('auth-service') {
@@ -49,4 +40,4 @@ pipeline {
           }
         }
     }
-}
+
