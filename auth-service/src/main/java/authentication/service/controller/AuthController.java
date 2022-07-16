@@ -10,6 +10,6 @@ public class AuthController {
 
     @GetMapping("/status")
     public String status() {
-        return "Hello, this is Auth Service which is already CICD!";
+        return "Hello, this is Auth Service which is already CICD! just test!";
     }
 }
