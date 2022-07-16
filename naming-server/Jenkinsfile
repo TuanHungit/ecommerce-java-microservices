@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    triggers {
+        pollSCM '* * * * *'
+    }
+
+    tools {
+        maven 'M3'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                dir('naming-server') {
+                    sh 'mvn -DskipTests=true clean package'
+                }
+            }
+        }
+
+        stage('Build docker image') {
+            steps {
+                dir('naming-server') {
+                    sh 'docker build -t tuanhung/eureka-service:1.0.0 .'
+                    sh 'docker image prune -f'
+                }
+            }
+        }
+
+        stage('Push image to Docker Hub') {
+            environment {
+                DOCKER_HUB_LOGIN = credentials('docker-hub')
+            }
+            steps {
+                dir('naming-server') {
+                    sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+                    sh 'docker image push tuanhung/eureka-service:1.0.0'
+                }
+
+            }
+        }
+
+        stage('Deploying App to Kubernetes') {
+          steps {
+            dir('kube') {
+                  kubernetesDeploy(
+                    configs: 'eureka-service.yaml',
+                    kubeconfigId: 'kubernetes',
+                    enableConfigSubstitution: true
+                    )         
+            }
+          }
+        }
+    }
+}
