@@ -23,6 +23,8 @@ spec:
           env:
             - name: EUREKA.CLIENT.SERVICEURL.DEFAULTZONE
               value: http://eureka-service:8761/eureka
+            - name: SPRING.ZIPKIN.BASEURL
+              value: http://zipkin:9411/
           ports:
             - containerPort: 8081
           imagePullPolicy: Always
