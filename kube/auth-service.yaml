@@ -20,6 +20,9 @@ spec:
       containers:
         - name: app
           image: tuanhung/auth-service:1.0.0
+          env:
+            - name: EUREKA.CLIENT.SERVICEURL.DEFAULTZONE
+              value: http://eureka-service:8761/eureka
           ports:
             - containerPort: 8081
           imagePullPolicy: Always
